@@ -32,10 +32,9 @@ RT_WEAK void *rt_heap_end_get(void)
 }
 #endif
 
-void SysTick_Handler(void)
-{
+void SysTick_Handler(void) {
     rt_interrupt_enter();
-    
+
     rt_tick_increase();
 
     rt_interrupt_leave();
@@ -44,10 +43,9 @@ void SysTick_Handler(void)
 /**
  * This function will initial your board.
  */
-void rt_hw_board_init(void)
-{
+void rt_hw_board_init(void) {
     extern void SystemClock_Config(void);
-    
+
     HAL_Init();
     SystemClock_Config();
     SystemCoreClockUpdate();
@@ -56,7 +54,7 @@ void rt_hw_board_init(void)
      * Enable the hardware timer and call the rt_os_tick_callback function
      * periodically with the frequency RT_TICK_PER_SECOND. 
      */
-    HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/RT_TICK_PER_SECOND);
+    HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / RT_TICK_PER_SECOND);
 
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT
